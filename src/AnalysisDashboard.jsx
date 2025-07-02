@@ -5,12 +5,12 @@ function AnalysisDashboard({ result }) {
   if (!result) return null;
 
   const getColorForToken = (token) => {
-    if (token.includes("shopping") || token.includes("interested")) return "#003A5A"; // green
-    if (token.includes("browsing") || token.includes("homepage")) return "#014B40"; // blue
-    if (token.includes("compare") || token.includes("indecision")) return "#5E4200"; // primary
-    if (token.includes("intent") || token.includes("checkout")) return "#8E0B21"; // warning
-    if (token.includes("purchase") || token.includes("hesitation") || token.includes("purchased")) return "#8E0B21"; // red
-    if (token.includes("casual") || token.includes("viewing")) return "#6c757d"; // gray
+    if (token.includes("shopping") || token.includes("interested")) return "#dfcfcc "; // green
+    if (token.includes("browsing") || token.includes("homepage")) return "#dfcfcc"; // blue
+    if (token.includes("compare") || token.includes("indecision")) return "#dfcfcc"; // primary
+    if (token.includes("intent") || token.includes("checkout")) return "#dfcfcc"; // warning
+    if (token.includes("purchase") || token.includes("hesitation") || token.includes("purchased")) return "#dfcfcc"; // red
+    if (token.includes("casual") || token.includes("viewing")) return "#dfcfcc"; // gray
     return "#616161"; // default gray
   };
 
@@ -30,24 +30,6 @@ function AnalysisDashboard({ result }) {
   return (
     <div className="container mt-5">
       <div className="row g-4">
-
-        {/* Interest Summary */}
-        <div className="col-lg-4">
-          <div className="card shadow-sm h-100">
-            <div className="card-body">
-              <h5 className="card-title">🔍 Interest Summary</h5>
-              <ul className="list-unstyled mb-2">
-                {result.interests.map((interest, i) => (
-                  <li key={i}>🛒 {interest}</li>
-                ))}
-              </ul>
-              <p className="mt-3">
-                ✅ <strong>Recent Focus:</strong><br />
-                → {result.recent_focus.product} — <em>{result.recent_focus.status}</em>
-              </p>
-            </div>
-          </div>
-        </div>
 
         {/* Intent Tokens Cloud */}
         <div className="col-lg-4">
