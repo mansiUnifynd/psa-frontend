@@ -46,19 +46,19 @@ function HomePage() {
             placeholder="🔍 Enter user_id"
             value={userId}
             onChange={(e) => setUserId(e.target.value)}
-            style={{ fontSize: "1rem", padding: "10px 12px" }}
+            style={{ fontSize: "1rem", padding: "10px 12px", margin: "10px" }}
           />
           <button
             className="btn btn-primary shadow-sm"
             onClick={handleAnalyze}
-            style={{ fontWeight: "500", padding: "10px 16px" }}
+            style={{ fontWeight: "500", padding: "10px 16px", margin: "10px" }}
           >
             🔍 Analyze
           </button>
           <button
             className="btn btn-outline-success shadow-sm"
             onClick={goToEventsPage}
-            style={{ fontWeight: "500", padding: "10px 16px", marginLeft: "8px" }}
+            style={{ fontWeight: "500", padding: "10px 16px", margin: "10px" }}
           >
             📊 Show Events
           </button>
