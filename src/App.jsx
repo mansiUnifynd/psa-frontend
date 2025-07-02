@@ -46,7 +46,7 @@ function HomePage() {
             placeholder="🔍 Enter user_id"
             value={userId}
             onChange={(e) => setUserId(e.target.value)}
-            style={{ fontSize: "1rem", padding: "10px 12px", margin: "10px", width: "50px"}}
+            style={{ fontSize: "1rem", padding: "10px 12px", margin: "10px", width: "500px"}}
           />
           <button
             className="btn btn-primary shadow-sm"

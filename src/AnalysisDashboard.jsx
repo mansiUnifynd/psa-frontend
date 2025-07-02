@@ -5,13 +5,13 @@ function AnalysisDashboard({ result }) {
   if (!result) return null;
 
   const getColorForToken = (token) => {
-    if (token.includes("shopping") || token.includes("interested")) return "#198754"; // green
-    if (token.includes("browsing") || token.includes("homepage")) return "#0dcaf0"; // blue
-    if (token.includes("compare") || token.includes("indecision")) return "#0d6efd"; // primary
-    if (token.includes("intent") || token.includes("checkout")) return "#ffc107"; // warning
-    if (token.includes("purchase") || token.includes("hesitation") || token.includes("purchased")) return "#dc3545"; // red
+    if (token.includes("shopping") || token.includes("interested")) return "#003A5A"; // green
+    if (token.includes("browsing") || token.includes("homepage")) return "#014B40"; // blue
+    if (token.includes("compare") || token.includes("indecision")) return "#5E4200"; // primary
+    if (token.includes("intent") || token.includes("checkout")) return "#8E0B21"; // warning
+    if (token.includes("purchase") || token.includes("hesitation") || token.includes("purchased")) return "#8E0B21"; // red
     if (token.includes("casual") || token.includes("viewing")) return "#6c757d"; // gray
-    return "#6c757d"; // default gray
+    return "#616161"; // default gray
   };
 
   // Generate random style for dynamic cloud effect
