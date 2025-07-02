@@ -42,7 +42,7 @@ function AnalysisDashboard({ result }) {
               <div className="container px-0">
                 <div className="row gx-2 gy-2">
                   {result.intent_tokens.map((token, i) => (
-                    <div key={i} className="col-2-4" style={{ flex: "0 0 20%", maxWidth: "20%" }}>
+                    <div key={i} className="col-3" style={{ flex: "0 0 25%", maxWidth: "25%" }}>
                       <div
                         className="badge text-white text-center d-block"
                         style={{
