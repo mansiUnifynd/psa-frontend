@@ -39,21 +39,31 @@ function HomePage() {
     <div className="container py-4">
       <h1 className="mb-4">🧠 MCP User Intent Analysis</h1>
 
-      <div className="input-group mb-3" style={{ maxWidth: "600px" }}>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Enter user_id"
-          value={userId}
-          onChange={(e) => setUserId(e.target.value)}
-        />
-        <button className="btn btn-primary" onClick={handleAnalyze}>
-          Analyze
-        </button>
-        <button className="btn btn-success ms-2" onClick={goToEventsPage}>
-          Show Events
-        </button>
-      </div>
+      <div className="input-group mb-4" style={{ maxWidth: "600px" }}>
+          <input
+            type="text"
+            className="form-control shadow-sm rounded-start"
+            placeholder="🔍 Enter user_id"
+            value={userId}
+            onChange={(e) => setUserId(e.target.value)}
+            style={{ fontSize: "1rem", padding: "10px 12px" }}
+          />
+          <button
+            className="btn btn-primary shadow-sm"
+            onClick={handleAnalyze}
+            style={{ fontWeight: "500", padding: "10px 16px" }}
+          >
+            🔍 Analyze
+          </button>
+          <button
+            className="btn btn-outline-success shadow-sm"
+            onClick={goToEventsPage}
+            style={{ fontWeight: "500", padding: "10px 16px", marginLeft: "8px" }}
+          >
+            📊 Show Events
+          </button>
+        </div>
+
 
       {loading && <div className="alert alert-info">⏳ Loading...</div>}
       {error && <div className="alert alert-danger">{error}</div>}
