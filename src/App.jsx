@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import AnalysisDashboard from "./AnalysisDashboard";
 
 function HomePage() {
   const [userId, setUserId] = useState("");
@@ -57,12 +58,7 @@ function HomePage() {
       {loading && <div className="alert alert-info">⏳ Loading...</div>}
       {error && <div className="alert alert-danger">{error}</div>}
 
-      {result && (
-        <div className="mt-4">
-          <h2>Analysis Result</h2>
-          <pre className="bg-light p-3 rounded border">{JSON.stringify(result, null, 2)}</pre>
-        </div>
-      )}
+      {result && <AnalysisDashboard result={result} />}
     </div>
   );
 }
