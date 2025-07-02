@@ -102,6 +102,7 @@ function ShowEventsPage() {
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
             <tr style={{ backgroundColor: "#f2f2f2" }}>
+              <th style={{ border: "1px solid #ddd", padding: "8px" }}>User Id</th>
               <th style={{ border: "1px solid #ddd", padding: "8px" }}>Event Type</th>
               <th style={{ border: "1px solid #ddd", padding: "8px" }}>Pathname</th>
               <th style={{ border: "1px solid #ddd", padding: "8px" }}>Timestamp</th>
@@ -110,6 +111,7 @@ function ShowEventsPage() {
           <tbody>
             {events.map((event, index) => (
               <tr key={index}>
+                <td style={{ border: "1px solid #ddd", padding: "8px" }}>{event.user_id}</td>
                 <td style={{ border: "1px solid #ddd", padding: "8px" }}>{event.event_type}</td>
                 <td style={{ border: "1px solid #ddd", padding: "8px" }}>{event.pathname}</td>
                 <td style={{ border: "1px solid #ddd", padding: "8px" }}>{event.occurred_at}</td>
