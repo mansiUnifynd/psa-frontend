@@ -1,6 +1,6 @@
 .token-cloud {
     display: grid;
-    grid-template-columns: repeat(4,260px); /*Dynamic columns with min width*/
+    grid-template-columns: repeat(4,300px); /*Dynamic columns with min width*/
     gap: 20px; 
     padding: 10px 10px;
     max-width: 100%;
