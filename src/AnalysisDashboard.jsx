@@ -3,15 +3,15 @@ import React from "react";
 function AnalysisDashboard({ result }) {
   if (!result) return null;
 
-  // 🧠 Token color logic
-  const getBadgeClass = (token) => {
-    if (token.includes("shopping") || token.includes("interested")) return "bg-success text-light";
-    if (token.includes("browsing") || token.includes("homepage")) return "bg-info text-dark";
-    if (token.includes("compare") || token.includes("indecision")) return "bg-primary text-light";
-    if (token.includes("intent") || token.includes("checkout")) return "bg-warning text-dark";
-    if (token.includes("purchase") || token.includes("hesitation")) return "bg-danger text-light";
-    return "bg-secondary text-light";
+  const getColorForToken = (token) => {
+    if (token.includes("shopping") || token.includes("interested")) return "#198754"; // green
+    if (token.includes("browsing") || token.includes("homepage")) return "#0dcaf0"; // blue
+    if (token.includes("compare") || token.includes("indecision")) return "#0d6efd"; // primary
+    if (token.includes("intent") || token.includes("checkout")) return "#ffc107"; // warning
+    if (token.includes("purchase") || token.includes("hesitation")) return "#dc3545"; // red
+    return "#6c757d"; // gray
   };
+  
 
   return (
     <div className="container mt-5">
@@ -36,24 +36,31 @@ function AnalysisDashboard({ result }) {
         </div>
 
         {/* Token Cloud */}
+
         <div className="col-lg-4">
-          <div className="card shadow-sm h-100">
+        <div className="card shadow-sm h-100">
             <div className="card-body">
-              <h5 className="card-title">🧩 Intent Tokens Cloud</h5>
-              <div className="d-flex flex-wrap">
+            <h5 className="card-title">🧩 Intent Tokens Cloud</h5>
+            <div className="d-flex flex-wrap">
                 {result.intent_tokens.map((token, i) => (
-                  <span
+                <span
                     key={i}
-                    className={`badge ${getBadgeClass(token)} me-2 mb-2 px-3 py-2`}
-                    style={{ fontSize: "0.85rem", borderRadius: "20px", whiteSpace: "normal" }}
-                  >
+                    className="badge text-white me-2 mb-2 px-3 py-2"
+                    style={{
+                    backgroundColor: getColorForToken(token),
+                    fontSize: "0.85rem",
+                    borderRadius: "20px",
+                    whiteSpace: "normal",
+                    }}
+                >
                     {token}
-                  </span>
+                </span>
                 ))}
-              </div>
             </div>
-          </div>
+            </div>
         </div>
+        </div>
+
 
         {/* AI Summary */}
         <div className="col-lg-4">
