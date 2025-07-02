@@ -15,11 +15,16 @@ function AnalysisDashboard({ result }) {
   };
 
   // Generate random style for dynamic cloud effect
-  const getRandomStyle = () => {
-    const size = Math.random() * 0.5 + 0.9; // Random font size between 0.9rem and 1.4rem
-    const offsetX = Math.random() * 30 - 15; // Random X offset between -15px and 15px
-    const offsetY = Math.random() * 20 - 10; // Random Y offset between -10px and 10px
-    return { fontSize: `${size}rem`, transform: `translate(${offsetX}px, ${offsetY}px)` };
+  const getRandomStyle = (index) => {
+    const size = Math.random() * 0.3 + 1.0; // Random font size between 1.0rem and 1.3rem
+    const offsetX = Math.random() * 20 - 10; // Random X offset between -10px and 10px
+    const offsetY = Math.random() * 15 - 7; // Random Y offset between -7px and 7px
+    const zIndex = Math.floor(Math.random() * 10) + 1; // Random z-index for layering
+    return { 
+      fontSize: `${size}rem`, 
+      transform: `translate(${offsetX}px, ${offsetY}px)`,
+      zIndex,
+    };
   };
 
   return (
@@ -51,15 +56,15 @@ function AnalysisDashboard({ result }) {
               <h5 className="card-title">🧩 Intent Tokens Cloud</h5>
               <div className="token-cloud">
                 {result.intent_tokens.map((token, i) => (
-                  <div key={i} className="token-item" style={getRandomStyle()}>
+                  <div key={i} className="token-item" style={getRandomStyle(i)}>
                     <div
                       className="badge text-white text-center"
                       style={{
                         backgroundColor: getColorForToken(token),
-                        borderRadius: "20px",
-                        padding: "6px 12px",
+                        borderRadius: "15px",
+                        padding: "5px 10px",
                         whiteSpace: "normal",
-                        minWidth: "120px",
+                        minWidth: "100px",
                       }}
                     >
                       {token}
