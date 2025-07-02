@@ -36,34 +36,33 @@ function AnalysisDashboard({ result }) {
 
         {/* Intent Tokens Cloud */}
         <div className="col-lg-4">
-            <div className="card shadow-sm h-100">
-                <div className="card-body">
-                <h5 className="card-title">🧩 Intent Tokens Cloud</h5>
-                <div className="container px-0">
-                    <div className="row gx-2 gy-2">
-                    {result.intent_tokens.map((token, i) => (
-                        <div key={i} className="col-6 col-sm-4 col-md-3 col-lg-2">
-                        <div
-                            className="badge text-white text-center d-block"
-                            style={{
-                            backgroundColor: getColorForToken(token),
-                            fontSize: "0.8rem",
-                            borderRadius: "20px",
-                            padding: "8px 12px",
-                            whiteSpace: "normal",
-                            margin: "15px 20px"
-                            }}
-                        >
-                            {token}
-                        </div>
-                        </div>
-                    ))}
+          <div className="card shadow-sm h-100">
+            <div className="card-body">
+              <h5 className="card-title">🧩 Intent Tokens Cloud</h5>
+              <div className="container px-0">
+                <div className="row gx-2 gy-2">
+                  {result.intent_tokens.map((token, i) => (
+                    <div key={i} className="col-2-4" style={{ flex: "0 0 20%", maxWidth: "20%" }}>
+                      <div
+                        className="badge text-white text-center d-block"
+                        style={{
+                          backgroundColor: getColorForToken(token),
+                          fontSize: "0.8rem",
+                          borderRadius: "20px",
+                          padding: "8px 12px",
+                          whiteSpace: "normal",
+                          margin: "15px 20px"
+                        }}
+                      >
+                        {token}
+                      </div>
                     </div>
+                  ))}
                 </div>
-                </div>
+              </div>
             </div>
+          </div>
         </div>
-
 
         {/* AI Summary */}
         <div className="col-lg-4">
