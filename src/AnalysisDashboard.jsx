@@ -50,6 +50,7 @@ function AnalysisDashboard({ result }) {
                           fontSize: "0.8rem",
                           borderRadius: "20px",
                           whiteSpace: "normal",
+                          padding: "8px 12px" 
                         }}
                       >
                         {token}
