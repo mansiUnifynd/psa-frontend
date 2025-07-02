@@ -8,8 +8,7 @@ function AnalysisDashboard({ result }) {
     if (token.includes("browsing") || token.includes("homepage")) return "#0dcaf0"; // blue
     if (token.includes("compare") || token.includes("indecision")) return "#0d6efd"; // primary
     if (token.includes("intent") || token.includes("checkout")) return "#ffc107"; // warning
-    if (token.includes("purchase") || token.includes("hesitation")) return "#dc3545"; // red
-    if (token.includes("purchased")) return "#dc3545"; // red for purchased
+    if (token.includes("purchase") || token.includes("hesitation") || token.includes("purchased")) return "#dc3545"; // red
     return "#6c757d"; // gray
   };
 
@@ -41,9 +40,9 @@ function AnalysisDashboard({ result }) {
             <div className="card-body">
               <h5 className="card-title">🧩 Intent Tokens Cloud</h5>
               <div className="container px-0">
-                <div className="row gx-2 gy-2">
+                <div className="row row-cols-4 g-2">
                   {result.intent_tokens.map((token, i) => (
-                    <div key={i} className="col-3" style={{ flex: "0 0 25%", maxWidth: "25%" }}>
+                    <div key={i} className="col">
                       <div
                         className="badge text-white text-center d-block"
                         style={{
@@ -52,7 +51,7 @@ function AnalysisDashboard({ result }) {
                           borderRadius: "20px",
                           padding: "8px 12px",
                           whiteSpace: "normal",
-                          margin: "5px 10px"
+                          margin: "5px 0"
                         }}
                       >
                         {token}
