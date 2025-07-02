@@ -74,30 +74,28 @@ function HomePage() {
     </div>
   );
 }
-
 function ShowEventsPage() {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const res = await fetch("https://personalized-shopping-assistant.onrender.com/get-events");
-        const data = await res.json();
-        setEvents(data.events);
-      } catch (err) {
-        setError("Failed to load events.");
-      }
+    // Connect to WebSocket
+    const socket = new WebSocket("wss://personalized-shopping-assistant.onrender.com/ws/events");
+
+    socket.onmessage = (event) => {
+      const newEvent = JSON.parse(event.data);
+      setEvents((prevEvents) => [newEvent, ...prevEvents]);
     };
 
-    fetchEvents();
+    socket.onerror = () => setError("WebSocket connection failed.");
+
+    return () => socket.close();  // Clean up on unmount
   }, []);
 
   return (
     <div style={{ padding: 30, fontFamily: "Arial" }}>
-      <h1>All Shopify Events</h1>
+      <h1>📡 Live Shopify Pixel Events</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
-
       {events.length > 0 ? (
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
@@ -120,11 +118,12 @@ function ShowEventsPage() {
           </tbody>
         </table>
       ) : (
-        <p>Loading events...</p>
+        <p>Waiting for events...</p>
       )}
     </div>
   );
 }
+
 
 function App() {
   return (
