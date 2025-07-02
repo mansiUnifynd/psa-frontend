@@ -31,55 +31,47 @@ function HomePage() {
   };
 
   const goToEventsPage = () => {
-    navigate("/show-events"); // ✅ navigate to show-events page
+    navigate("/show-events");
   };
 
   return (
-    <div style={{ padding: 30, fontFamily: "Arial" }}>
-      <h1>MCP User Intent Analysis</h1>
+    <div className="container py-4">
+      <h1 className="mb-4">🧠 MCP User Intent Analysis</h1>
 
-      <input
-        style={{ padding: 10, width: "300px" }}
-        type="text"
-        value={userId}
-        onChange={(e) => setUserId(e.target.value)}
-        placeholder="Enter user_id"
-      />
-      <button onClick={handleAnalyze} style={{ marginLeft: 10, padding: "10px 20px" }}>
-        Analyze
-      </button>
+      <div className="input-group mb-3" style={{ maxWidth: "600px" }}>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Enter user_id"
+          value={userId}
+          onChange={(e) => setUserId(e.target.value)}
+        />
+        <button className="btn btn-primary" onClick={handleAnalyze}>
+          Analyze
+        </button>
+        <button className="btn btn-success ms-2" onClick={goToEventsPage}>
+          Show Events
+        </button>
+      </div>
 
-      {/* ✅ NEW Show Events Button */}
-      <button
-        onClick={goToEventsPage}
-        style={{
-          marginLeft: 10,
-          padding: "10px 20px",
-          backgroundColor: "#4CAF50",
-          color: "white",
-          border: "none",
-        }}
-      >
-        Show Events
-      </button>
+      {loading && <div className="alert alert-info">⏳ Loading...</div>}
+      {error && <div className="alert alert-danger">{error}</div>}
 
-      {loading && <p>⏳ Loading...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
       {result && (
-        <div style={{ marginTop: 20 }}>
+        <div className="mt-4">
           <h2>Analysis Result</h2>
-          <pre>{JSON.stringify(result, null, 2)}</pre>
+          <pre className="bg-light p-3 rounded border">{JSON.stringify(result, null, 2)}</pre>
         </div>
       )}
     </div>
   );
 }
+
 function ShowEventsPage() {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    // Connect to WebSocket
     const socket = new WebSocket("wss://personalized-shopping-assistant.onrender.com/ws/events");
 
     socket.onmessage = (event) => {
@@ -89,41 +81,44 @@ function ShowEventsPage() {
 
     socket.onerror = () => setError("WebSocket connection failed.");
 
-    return () => socket.close();  // Clean up on unmount
+    return () => socket.close();
   }, []);
 
   return (
-    <div style={{ padding: 30, fontFamily: "Arial" }}>
-      <h1>Events on Online Store</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    <div className="container py-4">
+      <h1>🛍️ Events on Online Store</h1>
+
+      {error && <div className="alert alert-danger">{error}</div>}
+
       {events.length > 0 ? (
-        <table style={{ width: "100%", borderCollapse: "collapse" }}>
-          <thead>
-            <tr style={{ backgroundColor: "#f2f2f2" }}>
-              <th style={{ border: "1px solid #ddd", padding: "8px" }}>User Id</th>
-              <th style={{ border: "1px solid #ddd", padding: "8px" }}>Event Type</th>
-              <th style={{ border: "1px solid #ddd", padding: "8px" }}>Pathname</th>
-              <th style={{ border: "1px solid #ddd", padding: "8px" }}>Timestamp</th>
-            </tr>
-          </thead>
-          <tbody>
-            {events.map((event, index) => (
-              <tr key={index}>
-                <td style={{ border: "1px solid #ddd", padding: "8px" }}>{event.user_id}</td>
-                <td style={{ border: "1px solid #ddd", padding: "8px" }}>{event.event_type}</td>
-                <td style={{ border: "1px solid #ddd", padding: "8px" }}>{event.pathname}</td>
-                <td style={{ border: "1px solid #ddd", padding: "8px" }}>{event.occurred_at}</td>
+        <div className="table-responsive">
+          <table className="table table-bordered table-striped mt-3">
+            <thead className="table-light">
+              <tr>
+                <th>User Id</th>
+                <th>Event Type</th>
+                <th>Pathname</th>
+                <th>Timestamp</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {events.map((event, index) => (
+                <tr key={index}>
+                  <td>{event.user_id}</td>
+                  <td>{event.event_type}</td>
+                  <td>{event.pathname}</td>
+                  <td>{event.occurred_at}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ) : (
-        <p>Waiting for events...</p>
+        <p>⌛ Waiting for events...</p>
       )}
     </div>
   );
 }
-
 
 function App() {
   return (
