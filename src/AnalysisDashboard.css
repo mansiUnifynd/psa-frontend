@@ -8,6 +8,7 @@
     background: #f8f9fa; /* Light background */
     border-radius: 10px;
     overflow: hidden; /* Prevent overflow from offsets */
+    justify-content: center;
   }
   
   .token-item {
