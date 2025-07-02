@@ -9,6 +9,7 @@ function AnalysisDashboard({ result }) {
     if (token.includes("compare") || token.includes("indecision")) return "#0d6efd"; // primary
     if (token.includes("intent") || token.includes("checkout")) return "#ffc107"; // warning
     if (token.includes("purchase") || token.includes("hesitation")) return "#dc3545"; // red
+    if (token.includes("purchased")) return "#dc3545"; // red for purchased
     return "#6c757d"; // gray
   };
 
@@ -51,7 +52,7 @@ function AnalysisDashboard({ result }) {
                           borderRadius: "20px",
                           padding: "8px 12px",
                           whiteSpace: "normal",
-                          margin: "15px 20px"
+                          margin: "5px 10px"
                         }}
                       >
                         {token}
