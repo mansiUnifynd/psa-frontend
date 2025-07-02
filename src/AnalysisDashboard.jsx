@@ -1,4 +1,5 @@
 import React from "react";
+import "./AnalysisDashboard.css"; // Add custom CSS file
 
 function AnalysisDashboard({ result }) {
   if (!result) return null;
@@ -10,6 +11,14 @@ function AnalysisDashboard({ result }) {
     if (token.includes("intent") || token.includes("checkout")) return "#ffc107"; // warning
     if (token.includes("purchase") || token.includes("hesitation") || token.includes("purchased")) return "#dc3545"; // red
     return "#6c757d"; // gray
+  };
+
+  // Generate random size and position offset for dynamic cloud effect
+  const getRandomStyle = () => {
+    const size = Math.random() * 0.4 + 0.8; // Random font size between 0.8rem and 1.2rem
+    const offsetX = Math.random() * 20 - 10; // Random X offset between -10px and 10px
+    const offsetY = Math.random() * 20 - 10; // Random Y offset between -10px and 10px
+    return { fontSize: `${size}rem`, transform: `translate(${offsetX}px, ${offsetY}px)` };
   };
 
   return (
@@ -39,18 +48,16 @@ function AnalysisDashboard({ result }) {
           <div className="card shadow-sm h-100">
             <div className="card-body">
               <h5 className="card-title">🧩 Intent Tokens Cloud</h5>
-              <div className="d-flex flex-wrap">
+              <div className="token-cloud">
                 {result.intent_tokens.map((token, i) => (
-                  <div key={i} className="p-2" style={{ flex: "0 0 25%" }}>
+                  <div key={i} className="token-item" style={getRandomStyle()}>
                     <div
-                      className="badge text-white text-center d-block"
+                      className="badge text-white text-center"
                       style={{
                         backgroundColor: getColorForToken(token),
-                        fontSize: "0.8rem",
                         borderRadius: "20px",
                         padding: "8px 12px",
                         whiteSpace: "normal",
-                        width: "100%"
                       }}
                     >
                       {token}
