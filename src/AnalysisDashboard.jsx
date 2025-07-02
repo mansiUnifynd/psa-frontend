@@ -10,13 +10,14 @@ function AnalysisDashboard({ result }) {
     if (token.includes("compare") || token.includes("indecision")) return "#0d6efd"; // primary
     if (token.includes("intent") || token.includes("checkout")) return "#ffc107"; // warning
     if (token.includes("purchase") || token.includes("hesitation") || token.includes("purchased")) return "#dc3545"; // red
-    return "#6c757d"; // gray
+    if (token.includes("casual") || token.includes("viewing")) return "#6c757d"; // gray
+    return "#6c757d"; // default gray
   };
 
-  // Generate random size and position offset for dynamic cloud effect
+  // Generate random style for dynamic cloud effect
   const getRandomStyle = () => {
-    const size = Math.random() * 0.4 + 0.8; // Random font size between 0.8rem and 1.2rem
-    const offsetX = Math.random() * 20 - 10; // Random X offset between -10px and 10px
+    const size = Math.random() * 0.5 + 0.9; // Random font size between 0.9rem and 1.4rem
+    const offsetX = Math.random() * 30 - 15; // Random X offset between -15px and 15px
     const offsetY = Math.random() * 20 - 10; // Random Y offset between -10px and 10px
     return { fontSize: `${size}rem`, transform: `translate(${offsetX}px, ${offsetY}px)` };
   };
@@ -56,8 +57,9 @@ function AnalysisDashboard({ result }) {
                       style={{
                         backgroundColor: getColorForToken(token),
                         borderRadius: "20px",
-                        padding: "8px 12px",
+                        padding: "6px 12px",
                         whiteSpace: "normal",
+                        minWidth: "120px",
                       }}
                     >
                       {token}

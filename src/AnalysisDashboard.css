@@ -1,25 +1,37 @@
 .token-cloud {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjusts columns dynamically */
-    gap: 15px;
-    padding: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Dynamic columns with min width */
+    gap: 10px;
+    padding: 15px;
     max-width: 100%;
     position: relative;
+    background: #f8f9fa; /* Light background for contrast */
+    border-radius: 10px;
   }
   
   .token-item {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
   }
   
   .badge {
     width: 100%;
     box-sizing: border-box;
-    transition: transform 0.3s ease; /* Smooth transition for random positioning */
+    transition: transform 0.3s ease, font-size 0.3s ease; /* Smooth transitions */
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   }
   
-  /* Ensure tokens don't overlap excessively */
-  .token-cloud .token-item {
-    z-index: 1;
+  /* Optional: Add hover effect */
+  .token-item:hover .badge {
+    transform: scale(1.05);
+    z-index: 2;
+  }
+  
+  /* Ensure proper wrapping and alignment */
+  .token-cloud {
+    justify-items: center;
+    align-items: center;
   }
