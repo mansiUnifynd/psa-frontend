@@ -1,7 +1,7 @@
 .token-cloud {
     display: grid;
-    /* grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); Dynamic columns with min width */
-    gap: 5px; /* Reduced gap for denser packing */
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /*Dynamic columns with min width*/
+    gap: 20px; 
     padding: 10px 10px;
     max-width: 100%;
     position: relative;
