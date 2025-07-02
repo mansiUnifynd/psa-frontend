@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
-function App() {
+function HomePage() {
   const [userId, setUserId] = useState("");
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [events, setEvents] = useState([]); // ✅ ADDED inside component
+
+  const navigate = useNavigate();
 
   const handleAnalyze = async () => {
     if (!userId.trim()) {
@@ -16,7 +18,6 @@ function App() {
     setLoading(true);
     setError("");
     setResult(null);
-    setEvents([]); // Optional: Clear old events
 
     try {
       const res = await fetch(`https://personalized-shopping-assistant.onrender.com/analyze?user_id=${userId}`);
@@ -29,21 +30,8 @@ function App() {
     }
   };
 
-  // ✅ NEW FUNCTION to fetch all events
-  const handleShowEvents = async () => {
-    setLoading(true);
-    setError("");
-    setResult(null); // Optional: Clear analysis if showing events
-
-    try {
-      const res = await fetch("https://personalized-shopping-assistant.onrender.com/get-events");
-      const data = await res.json();
-      setEvents(data.events);
-    } catch (err) {
-      setError("❌ Could not fetch events.");
-    } finally {
-      setLoading(false);
-    }
+  const goToEventsPage = () => {
+    navigate("/show-events"); // ✅ navigate to show-events page
   };
 
   return (
@@ -57,55 +45,91 @@ function App() {
         onChange={(e) => setUserId(e.target.value)}
         placeholder="Enter user_id"
       />
-      <button
-        onClick={handleAnalyze}
-        style={{ marginLeft: 10, padding: "10px 20px" }}
-      >
+      <button onClick={handleAnalyze} style={{ marginLeft: 10, padding: "10px 20px" }}>
         Analyze
       </button>
-      {/* ✅ NEW BUTTON */}
+
+      {/* ✅ NEW Show Events Button */}
       <button
-        onClick={handleShowEvents}
-        style={{ marginLeft: 10, padding: "10px 20px", backgroundColor: "#4CAF50", color: "white", border: "none" }}
+        onClick={goToEventsPage}
+        style={{
+          marginLeft: 10,
+          padding: "10px 20px",
+          backgroundColor: "#4CAF50",
+          color: "white",
+          border: "none",
+        }}
       >
         Show Events
       </button>
 
       {loading && <p>⏳ Loading...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
-
       {result && (
         <div style={{ marginTop: 20 }}>
           <h2>Analysis Result</h2>
           <pre>{JSON.stringify(result, null, 2)}</pre>
         </div>
       )}
+    </div>
+  );
+}
 
-      {/* ✅ EVENTS TABLE */}
-      {events.length > 0 && (
-        <div style={{ marginTop: 30 }}>
-          <h2>All Shopify Events</h2>
-          <table style={{ width: "100%", borderCollapse: "collapse" }}>
-            <thead>
-              <tr style={{ backgroundColor: "#f2f2f2" }}>
-                <th style={{ border: "1px solid #ddd", padding: "8px" }}>Event Type</th>
-                <th style={{ border: "1px solid #ddd", padding: "8px" }}>Pathname</th>
-                <th style={{ border: "1px solid #ddd", padding: "8px" }}>Timestamp</th>
+function ShowEventsPage() {
+  const [events, setEvents] = useState([]);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const res = await fetch("https://personalized-shopping-assistant.onrender.com/get-events");
+        const data = await res.json();
+        setEvents(data.events);
+      } catch (err) {
+        setError("Failed to load events.");
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
+  return (
+    <div style={{ padding: 30, fontFamily: "Arial" }}>
+      <h1>All Shopify Events</h1>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+
+      {events.length > 0 ? (
+        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <thead>
+            <tr style={{ backgroundColor: "#f2f2f2" }}>
+              <th style={{ border: "1px solid #ddd", padding: "8px" }}>Event Type</th>
+              <th style={{ border: "1px solid #ddd", padding: "8px" }}>Pathname</th>
+              <th style={{ border: "1px solid #ddd", padding: "8px" }}>Timestamp</th>
+            </tr>
+          </thead>
+          <tbody>
+            {events.map((event, index) => (
+              <tr key={index}>
+                <td style={{ border: "1px solid #ddd", padding: "8px" }}>{event.event_type}</td>
+                <td style={{ border: "1px solid #ddd", padding: "8px" }}>{event.pathname}</td>
+                <td style={{ border: "1px solid #ddd", padding: "8px" }}>{event.occurred_at}</td>
               </tr>
-            </thead>
-            <tbody>
-              {events.map((event, index) => (
-                <tr key={index}>
-                  <td style={{ border: "1px solid #ddd", padding: "8px" }}>{event.event_type}</td>
-                  <td style={{ border: "1px solid #ddd", padding: "8px" }}>{event.pathname}</td>
-                  <td style={{ border: "1px solid #ddd", padding: "8px" }}>{event.occurred_at}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p>Loading events...</p>
       )}
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/show-events" element={<ShowEventsPage />} />
+    </Routes>
   );
 }
 
