@@ -31,12 +31,12 @@ function AnalysisDashboard({ result }) {
             <div className="card-body">
               <h5 className="card-title">🧩 Intent Tokens Cloud</h5>
               <div className="d-flex flex-wrap gap-2">
-                {result.intent_tokens.map((token, i) => (
-                  <span key={i} className="badge bg-primary-subtle text-dark p-2">
-                    {token}
-                  </span>
-                ))}
-              </div>
+                    {result.intent_tokens.map((token, i) => (
+                        <span key={i} className="badge bg-primary-subtle text-dark p-2">
+                        {token}
+                        </span>
+                    ))}
+                </div>
             </div>
           </div>
         </div>
@@ -46,7 +46,9 @@ function AnalysisDashboard({ result }) {
           <div className="card shadow-sm h-100">
             <div className="card-body">
               <h5 className="card-title">🧠 AI Analysis Summary</h5>
-              <p>{result.summary}</p>
+              {result.summary.split("\n\n").map((para, i) => (
+                <p key={i} className="mb-2">{para}</p>
+                ))}
             </div>
           </div>
         </div>
@@ -73,42 +75,27 @@ function AnalysisDashboard({ result }) {
         </div>
 
         {/* Recommendations */}
+
         <div className="col-12">
-          <div className="card shadow-sm">
-            <div className="card-body">
-              <h5 className="card-title">🛍️ Personalized Recommendations</h5>
-              <div className="row g-3">
-                {result.recommendations.map((product, i) => (
-                  <div key={i} className="col-md-4">
-                    <div className="card h-100">
-                      {product.image && (
-                        <img
-                          src={product.image}
-                          className="card-img-top"
-                          alt={product.title}
-                        />
-                      )}
-                      <div className="card-body">
-                        <h6 className="card-title">{product.title}</h6>
-                        <a href={product.url} className="btn btn-sm btn-outline-primary" target="_blank">
-                          View Product
+            <div className="card shadow-sm">
+                <div className="card-body">
+                <h5 className="card-title">🛍️ Personalized Recommendations</h5>
+                <ul className="list-group list-group-flush">
+                    {result.recommendations.map((product, i) => (
+                    <li key={i} className="list-group-item">
+                        <a
+                        href={product.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-decoration-none"
+                        >
+                        {i + 1}. {product.title}
                         </a>
-                        {product.tags?.length > 0 && (
-                          <div className="mt-2">
-                            {product.tags.map((tag, j) => (
-                              <span key={j} className="badge bg-secondary me-1">
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+                    </li>
+                    ))}
+                </ul>
+                </div>
             </div>
-          </div>
         </div>
 
       </div>
