@@ -11,7 +11,6 @@ function AnalysisDashboard({ result }) {
     if (token.includes("purchase") || token.includes("hesitation")) return "#dc3545"; // red
     return "#6c757d"; // gray
   };
-  
 
   return (
     <div className="container mt-5">
@@ -35,32 +34,33 @@ function AnalysisDashboard({ result }) {
           </div>
         </div>
 
-        {/* Token Cloud */}
-
+        {/* Intent Tokens Cloud */}
         <div className="col-lg-4">
-        <div className="card shadow-sm h-100">
+          <div className="card shadow-sm h-100">
             <div className="card-body">
-            <h5 className="card-title">🧩 Intent Tokens Cloud</h5>
-            <div className="d-flex flex-wrap">
-                {result.intent_tokens.map((token, i) => (
-                <span
-                    key={i}
-                    className="badge text-white me-2 mb-2 px-3 py-2"
-                    style={{
-                    backgroundColor: getColorForToken(token),
-                    fontSize: "0.85rem",
-                    borderRadius: "20px",
-                    whiteSpace: "normal",
-                    }}
-                >
-                    {token}
-                </span>
-                ))}
+              <h5 className="card-title">🧩 Intent Tokens Cloud</h5>
+              <div className="container px-0">
+                <div className="row gx-2 gy-2">
+                  {result.intent_tokens.map((token, i) => (
+                    <div key={i} className="col-6 col-sm-4 col-md-3 col-lg-2">
+                      <span
+                        className="badge text-white w-100 py-2 px-2 text-center"
+                        style={{
+                          backgroundColor: getColorForToken(token),
+                          fontSize: "0.8rem",
+                          borderRadius: "20px",
+                          whiteSpace: "normal",
+                        }}
+                      >
+                        {token}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-            </div>
+          </div>
         </div>
-        </div>
-
 
         {/* AI Summary */}
         <div className="col-lg-4">
