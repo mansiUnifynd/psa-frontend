@@ -16,7 +16,7 @@ function AnalysisDashboard({ result }) {
 
   // Generate random style for dynamic cloud effect
   const getRandomStyle = (index) => {
-    const size = Math.random() * 0.3 + 1.0; // Random font size between 1.0rem and 1.3rem
+    const size = 0.13252; // Random font size between 1.0rem and 1.3rem
     const offsetX = Math.random() * 20 - 10; // Random X offset between -10px and 10px
     const offsetY = Math.random() * 15 - 7; // Random Y offset between -7px and 7px
     const zIndex = Math.floor(Math.random() * 10) + 1; // Random z-index for layering
