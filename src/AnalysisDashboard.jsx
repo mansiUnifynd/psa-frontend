@@ -11,7 +11,7 @@ function AnalysisDashboard({ result }) {
     if (token.includes("intent") || token.includes("checkout")) return "#dfcfcc"; // warning
     if (token.includes("purchase") || token.includes("hesitation") || token.includes("purchased")) return "#dfcfcc"; // red
     if (token.includes("casual") || token.includes("viewing")) return "#dfcfcc"; // gray
-    return "#616161"; // default gray
+    return "#dfcfcc"; // default gray
   };
 
   // Generate random style for dynamic cloud effect
